@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <script src="js/vendor/jquery.min.js"></script>
+
+    <script src="js/vendor/popper.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/fusioncharts.js"></script>
+    <script src="js/vendor/fusioncharts.theme.ocean.js"></script>
+
+    <title>Annual Fiscal Position-Singapore</title>
+  </head>
+  <body>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+
+    <div>
+      <div class="container-fluid">
+        <div class="row flex-xl-nowrap">
+          <!-- sidebar -->
+          <div id="nav" class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <div class="row">
+              <div class="col-md-12 col-8">
+                <div class="text-sm-left text-md-center logo">
+                  Singapore<span id="beta"> Government</span>
+                </div>
+              </div>
+              <div class="col-md-12 col-4 text-right">
+                <!-- for menu when screen width is less-->
+                <button
+                  class="btn btn-link bd-search-docs-toggle d-md-none p-0 ml-3 collapsed"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#bd-docs-nav"
+                  aria-controls="bd-docs-nav"
+                  aria-expanded="false"
+                  aria-label="Toggle docs navigation"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 30 30"
+                    width="30"
+                    height="30"
+                    focusable="false"
+                  >
+                    <title>Menu</title>
+                    <path
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeMiterlimit="10"
+                      d="M4 7h22M4 15h22M4 23h22"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <nav class="collapse bd-links" id="bd-docs-nav">
+              <ul class="left-options">
+                <li
+                  class="left-option"
+                  onclick="loadFiscalPosition()"
+                  id="Government"
+                >
+                  <a href="#">Fiscal Position</a>
+                </li>
+                <li
+                  class="left-option"
+                  onclick="loadOperatingRevenue()"
+                  id="Operating"
+                >
+                  <a href="#">Operating Revenue</a>
+                </li>
+                <li
+                  class="left-option"
+                  onclick="loadTotalExpenditure()"
+                  id="Expenditure"
+                >
+                  <a href="#">Total Expenditure</a>
+                </li>
+                <li
+                  class="left-option"
+                  onclick="loadReferences()"
+                  id="References"
+                >
+                  <a href="#">References</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <!-- sidebar end -->
+          <div
+            id="content-body"
+            class="col-12 col-md-9 col-xl-10 pl-4 pr-4 bd-content"
+          >
+            <!-- heading row -->
+            <div class="row">
+              <div class="col-md-12 pt-4 mt-3">
+                <h2>Budget and Fiscal Position, Annual</h2>
+              </div>
+            </div>
+            <!-- heading row end-->
+
+            <!-- time frame row start -->
+            <div class="row mt-3" id='years_range'>
+              <div class="col-md-7">
+                <ul class="buttonwrapper">
+                  <li id="1997-2010">
+                    <label id="l1">1997-2010</label>
+                  </li>
+                  <li id="2011-2021" class="active">
+                    <label id="l2">2011-2021</label>
+                  </li>
+                  <li id="all">
+                    <label id="l3">All</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- time frame row end -->
+            <!-- chart row start -->
+            <div class="row mt-3 db-chart">
+              <div id="parent1" class="col-lg-6 col-xl-4">
+                <div class="chart-card mb-4">
+                  <div class="chart-title" id="text1">Chart 1</div>
+
+                  <div id="fiscal-position-additional">
+                    <div class="container-fluid">
+                      <div class="container-fluid">
+                        <div class="row pl-5 pr-5 pt-5 pb-0 time-control">
+                          <div
+                            class="col-xs-6 mr-4 ml-4 pl-1 pr-1"
+                            id="c1"
+                            onclick="showSurplusDeficitChart()"
+                          >
+                            Primary Surplus - Deficit
+                          </div>
+                          <div
+                            class="col-xs-6 mr-4 ml-4 pl-1 pr-1"
+                            id="c2"
+                            onclick="showBalanceChart()"
+                          >
+                            Primary - Basic - Overall Balance
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                    <div>
+                      <div class="col-lg-12">
+                        <div
+                          id="cost-elements"
+                          class="row card-group pt-3 pb-5"
+                        >
+                          <div
+                            class="text-center col-lg-3 col-md-6 col-sm-6 mb-4"
+                          >
+                            <div class="card-block">
+                              <h4 id="co-tablecell-title1" class="kpi-title">
+                                Title1
+                              </h4>
+                              <div
+                                id="co-tablecell-value1"
+                                class="kpi-content"
+                              ></div>
+                            </div>
+                          </div>
+                          <div
+                            class="text-center col-lg-3 col-md-6 col-sm-6 mb-4"
+                          >
+                            <div class="card-block">
+                              <h4 id="co-tablecell-title2" class="kpi-title">
+                                Title 2
+                              </h4>
+                              <div
+                                id="co-tablecell-value2"
+                                class="kpi-content"
+                              ></div>
+                            </div>
+                          </div>
+                          <div
+                            class="text-center col-lg-3 col-md-6 col-sm-6 mb-4"
+                          >
+                            <div class="card-block">
+                              <h4 id="co-tablecell-title3" class="kpi-title">
+                                Title 3
+                              </h4>
+                              <div
+                                id="co-tablecell-value3"
+                                class="kpi-content"
+                              ></div>
+                            </div>
+                          </div>
+                          <div
+                            class="text-center col-lg-3 col-md-6 col-sm-6 mb-4"
+                          >
+                            <div class="card-block">
+                              <h4 id="co-tablecell-title4" class="kpi-title">
+                                Title 4
+                              </h4>
+                              <div
+                                id="co-tablecell-value4"
+                                class="kpi-content"
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <br />
+                  </div>
+                  <div id="chart1" class="chart">Rendering chart 1 here</div>
+                </div>
+              </div>
+              <div id="parent5" class="col-lg-6 col-xl-4">
+                <div class="chart-card mb-4">
+                  <div class="chart-title" id="text5">Operating Revenue</div>
+                  <div id="chart5" class="chart">Chart 5</div>
+                </div>
+              </div>
+              <div id="parent6" class="col-lg-6 col-xl-4">
+                <div class="chart-card mb-4">
+                  <div class="chart-title" id="text6">Total Expenditure</div>
+                  <div id="total-expenditure-additional">
+                    <div class="container-fluid">
+                      <div class="row pl-5 pr-5 pt-0 pb-0">
+                        <div
+                          class="col-xl-4 offset-xl-4 col-lg-6 mb-3 text-center"
+                        >
+                          <label class="label-info">Usage By: &nbsp;</label>
+                          <select id="expenditure-select">
+                            <option>All</option>
+                          </select>
+                        </div>
+                        <div class="col-xl-4 col-lg-6"></div>
+                      </div>
+                    </div>
+                    <br />
+                  </div>
+                  <div id="chart6" class="chart">Chart 6</div>
+                </div>
+              </div>
+              <div id="parent2" class="col-lg-12 col-xl-8">
+                <div class="chart-card mb-4">
+                  <div class="chart-title" id="text2">Taxes</div>
+                  <div id="chart2" class="chart">Chart 2</div>
+                </div>
+              </div>
+              <div id="parent4" class="col-lg-6 col-xl-4">
+                <div class="chart-card mb-4">
+                  <div class="chart-title" id="text4">Others</div>
+                  <div id="chart4" class="chart">Chart 4</div>
+                </div>
+              </div>
+              <div id="parent3" class="col-lg-12 col-xl-8">
+                <div class="chart-card mb-4">
+                  <div class="chart-title" id="text3">Fees & Charges</div>
+                  <div id="chart3" class="chart">Chart 3</div>
+                </div>
+              </div>
+              <div id="parent7" class="col-lg-12">
+                <h2>References</h2>
+                <div class="row">
+                <div class="card col-lg-6">
+                  <h5 class="card-header"> Data Source </h5>
+                  <div class="card-body">
+                    <h6 class="card-title">Singapore Government Site @Data.gov.sg (1997 to 2021)</h6>
+                    <p class="card-text"> * Fiscal Position Budget Data. <a href="https://data.gov.sg/dataset/government-fiscal-position-annual?resource_id=98856a60-33cd-482a-9dc4-1ed52e562d5d" class="link-success">Fiscal Data Link</a></p> 
+                    <p class="card-text"> * Operating Revenue Data. <a href="https://data.gov.sg/dataset/government-fiscal-position-annual?resource_id=d4dbffc1-b097-4d86-9da8-afaf91dfbcbd" >Operating Revenue Link</a></p>
+                    <p class="card-text"> * Total Expenditure Data. <a href="https://data.gov.sg/dataset/government-fiscal-position-annual?resource_id=7b4af397-3e8f-40de-9208-90d168afc810" >Total Expenditure Link</a></p>
+                  </div>
+                </div>
+                <div class="card col-lg-6">
+                  <h5 class="card-header"> Technology </h5>
+                  <div class="card-body">
+                    <p class="card-text"> * Bootstrap for CSS <a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/"> Bootstrap Link </a></p> 
+                    <p class="card-text"> * JavaScript (Data Read & Processing) <a href="https://www.javascript.com/learn/strings" > JavaScript Link </a></p>
+                    <p class="card-text"> * HTML 5 <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML" >HTML 5 Link</a></p>
+                    <p class="card-text"> * Fusion Charts <a href="https://www.fusioncharts.com/charts/column-bar-charts/" >Fusion Charts Link</a></p>
+                  </div>
+                </div>
+              </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/fiscalPosition/csv.js"></script>
+    <script src="js/fiscalPosition/data.js"></script>
+    <script src="js/fiscalPosition/index.js"></script>
+    <script src="js/operatingRevenue/csv.js"></script>
+    <script src="js/operatingRevenue/data.js"></script>
+    <script src="js/operatingRevenue/index.js"></script>
+    <script src="js/totalExpenditure/csv.js"></script>
+    <script src="js/totalExpenditure/data.js"></script>
+    <script src="js/totalExpenditure/index.js"></script>
+    <script src="js/references/index.js"></script>
+  </body>
+</html>
