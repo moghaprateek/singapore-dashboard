@@ -482,9 +482,11 @@ body {
 }
 
 a{
-  color: green;
+  color:darkcyan;
   background-color: transparent;
-  text-decoration: none;
+  text-decoration: underline;
+  font-weight: bolder;
+
 }
 
 a:hover {
