@@ -97,7 +97,7 @@ const ds2ORoperatingRevenueOthers = objReduceSum(
 const ds1ORTax = ds1OR.filter((row) => row.class === "Tax");
 const ds1ORTaxItems = objToArrOR(ds1ORTax.reduce(creategoryAndAggregate, {}));
 
-const ds2ORTax = ds1OR.filter((row) => row.class === "Tax");
+const ds2ORTax = ds2OR.filter((row) => row.class === "Tax");
 const ds2ORTaxItems = objToArrOR(ds2ORTax.reduce(creategoryAndAggregate, {}));
 
 const tax = operatingRevenueData.filter((row) => row.class === "Tax");
